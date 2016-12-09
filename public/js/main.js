@@ -28,11 +28,20 @@ mentoringApp.filter('mentorTags', function() {
                 return true;
             }
 
-            tags = tags.toLowerCase();
+            if (typeof tags === 'string') {
+                tags = tags.toLowerCase();
+                tags = tags.split(",");
+            }
+            
+            var lTags = tags.length;
             for(var i in mentor.mentorTags) {
                 var name = mentor.mentorTags[i].name.toLowerCase();
-                if(name.indexOf(tags) > -1) {
-                    return true;
+                for(var x = 0; x < lTags; x++) {
+                    var tag = tags[x].trim();
+
+                    if(name.indexOf(tag) > -1 && tag != "") {
+                        return true;
+                    }
                 }
             }
 
@@ -82,6 +91,9 @@ controllers.MentorSearchController = function($scope, $http, $timeout) {
     $http.get('/api/v0/mentors').
         success(function(data, status, headers, config){
             $scope.mentors = data;
+            $scope.random = function() {
+                return 0.5 - Math.random();
+            },
             $timeout(function () {
                 Prism.highlightAll();
             }, 50);

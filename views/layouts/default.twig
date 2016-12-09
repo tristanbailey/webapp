@@ -13,20 +13,20 @@
     <title>PHP Mentoring</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="{{ app.request.baseUrl }}/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="{{ global.request.baseUrl }}/apple-touch-icon.png">
 
-    <link rel="stylesheet" href="{{ app.request.baseUrl }}/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ app.request.baseUrl }}/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{{ app.request.baseUrl }}/css/prism.css">
-    <link rel="stylesheet" href="{{ app.request.baseUrl }}/css/main.css">
+    <link rel="stylesheet" href="{{ global.request.baseUrl }}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ global.request.baseUrl }}/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ global.request.baseUrl }}/css/prism.css">
+    <link rel="stylesheet" href="{{ global.request.baseUrl }}/css/main.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
     <!--[if lt IE 9]>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
     <![endif]-->
 
-    <script src="{{ app.request.baseUrl }}/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="{{ global.request.baseUrl }}/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
-<body data-ng-app="mentoringApp">
+<body>
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
@@ -41,25 +41,25 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('index') }}">PHP Mentoring</a>
+            <a class="navbar-brand" href="{{ path('index') }}">PHP Mentoring</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('guidelines') }}">Guidelines</a></li>
-                <li><a href="{{ url('why') }}">Why Mentoring</a></li>
-                <li><a href="{{ url('mentors') }}">Search Mentors</a></li>
-                <li><a href="{{ url('apprentices') }}">Search Apprentices</a></li>
+                <li><a href="{{ path('guidelines') }}">Guidelines</a></li>
+                <li><a href="{{ path('why') }}">Why Mentoring</a></li>
+                <li><a href="{{ path('mentors') }}">Search Mentors</a></li>
+                <!-- <li><a href="{{ path('apprentices') }}">Search Apprentices</a></li> -->
                 <li><a href="http://webchat.freenode.net/?channels=phpmentoring&uio=MTE9MjI2dd">Join us on IRC</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
             {% if app.session.get('user') %}
-                <li><a href="{{ url('account.profile') }}">My Profile</a></li>
+                <li><a href="{{ path('account.profile') }}">My Profile</a></li>
                 {% set unread = unread_messages(app.session.get('user')) %}
-                <li><a href="{{ url('conversation.index') }}">Inbox{% if unread > 0 %} ({{ unread }}){% endif %}</a></li>
-                <li><a href="{{ url('auth.logout') }}">Logout</a></li>
+                <li><a href="{{ path('conversation.index') }}">Inbox{% if unread > 0 %} ({{ unread }}){% endif %}</a></li>
+                <li><a href="{{ path('auth.logout') }}">Logout</a></li>
             {% else %}
-                <li><a href="{{ url('auth.login') }}">Login</a></li>
+                <li><a href="{{ path('auth.login') }}">Login</a></li>
             {% endif %}
             </ul>
 
@@ -93,13 +93,13 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
-<script>window.jQuery || document.write('<script src="{{ app.request.baseUrl }}/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="{{ global.request.baseUrl }}/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
-<script src="{{ app.request.baseUrl }}/js/vendor/bootstrap.min.js"></script>
+<script src="{{ global.request.baseUrl }}/js/vendor/bootstrap.min.js"></script>
 
-<script src="{{ app.request.baseUrl }}/js/vendor/prism.js"></script>
+<script src="{{ global.request.baseUrl }}/js/vendor/prism.js"></script>
 
-<script src="{{ app.request.baseUrl }}/js/main.js"></script>
+<script src="{{ global.request.baseUrl }}/js/main.js"></script>
 
 <script>
     (function (b, o, i, l, e, r) {

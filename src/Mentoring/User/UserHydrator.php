@@ -32,12 +32,15 @@ class UserHydrator
             'timeCreated' => $object->getTimeCreated(),
             'isEnabled' => $object->isEnabled(),
             'githubUid' => $object->getGithubUid(),
+            'githubName' => $object->getGithubName(),
             'isMentee' => $object->isMentee(),
             'isMentor' => $object->isMentor(),
             'profile' => $object->getProfile(),
             'apprenticeTags' => $object->getApprenticeTags(),
             'mentorTags' => $object->getMentorTags(),
-            'imageUrl'   => $object->getProfileImage(),
+            'imageUrl' => $object->getProfileImage(),
+            'timezone' => $object->getTimezone(),
+            'sendNotifications' => $object->hasSendNotifications()
         ];
 
         if (!is_null($this->termHydrator)) {
@@ -62,6 +65,10 @@ class UserHydrator
             $data['timeCreated'] = $data['timeCreated']->format(\DateTime::ISO8601);
         }
 
+        if ($data['timezone'] instanceof \DateTimeZone) {
+            $data['timezone'] = $data['timezone']->getName();
+        }
+
         return $data;
     }
 
@@ -77,7 +84,11 @@ class UserHydrator
     {
         $object->setEmail($data['email']);
         $object->setName($data['name']);
+        $object->setSendNotifications($data['sendNotifications']);
 
+        if (isset($data['timezone'])) {
+            $object->setTimezone($data['timezone']);
+        }
 
         $object->setIsMentee($data['isMentee']);
         $object->setIsMentor($data['isMentor']);
@@ -88,6 +99,10 @@ class UserHydrator
 
         if (isset($data['githubUid'])) {
             $object->setGithubUid($data['githubUid']);
+        }
+
+        if (isset($data['githubName'])) {
+            $object->setGithubName($data['githubName']);
         }
 
         if (isset($data['timeCreated'])) {

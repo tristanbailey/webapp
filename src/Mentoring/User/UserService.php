@@ -110,9 +110,11 @@ class UserService
     public function createUser($data)
     {
         $data['timeCreated'] = new \DateTime();
+        $data['timezone'] = null;
         $data['isEnabled'] = true;
         $data['isMentee'] = false;
         $data['isMentor'] = false;
+        $data['sendNotifications'] = true;
 
         $user = $this->hydrator->hydrate($data, new User());
 
